@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll to Reveal</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <script src="https://kit.fontawesome.com/ba7ff48937.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header_middle">
+                <h2 class="header_title">Scroll to Reveal</h2>
+            </div>
+            <button id="menuButton" type="button" class="menu-button" aria-labelledby="menuButtonLabel">
+                <span class="menu-button__line">
+                    <span id="menuButtonLabel" style="display: none">メニューボタン</span>
+                </span>
+            </button>
+        </div>
+    </header>
+    <main class="main">
+        <section class="main_visual" id="top">
+            <video class="background-video" autoplay loop muted playsinline>
+                <source src="movie/4990317-hd_1920_1080_30fps.mp4" type="video/mp4">
+            </video>
+            <div class="container01">
+                <h1 class="top_title">Scrollで動く、JSで魅せる</h1>
+                <p class="top_description">～コードで体験する、Webアニメーションの世界～</p>
+            </div>
+        </section>
+        <section class="about" id="about">
+            <div class="container02">
+                <h1 class="about_title">About This Site</h1>
+                <p class="about_description">
+                    Webサイトでよく見るスクロール連動アニメーション。<br>
+                    これらはどのようにして実現しているのでしょうか。<br>
+                    サンプルコードとともに実際に見ていきましょう。
+                </p>
+            </div>
+        </section>
+        <section class="how" id="how">
+            <div class="container03">
+                <h1 class="how_title">How It Works</h1>
+                <p class="how_description">
+                    スクロールに連動したアニメーションは、Intersection Observer API を用いて実現しています。<br>
+                    これにより、スクロール位置に応じて要素の表示状態を監視・制御し、適切なタイミングでアニメーションを実行できます。
+                </p>
+            </div>
+        </section>
+        <section class="what" id="what">
+            <div class="container04">
+                <div class="what_content">
+                    <h1 class="what_title">
+                        What Is <br> 
+                        The Intersection Observer?
+                    </h1>
+                    <p class="what_description">
+                        Intersection Observer APIは、ターゲット要素がビューポート（ブラウザの表示領域）または他の指定された要素（ルート要素）と交差する（Intersectionする）のを非同期的に監視するためのWeb APIです。<br>
+                        簡単に言えば、要素が「画面に入った・出た」を感知できる仕組みです。<br>
+                        従来のスクロールイベントに比べて、非常に軽量でパフォーマンスが高く、複雑な計算を必要とせずに効率的なアニメーションやレイジーロードを実現できます。
+                    </p>
+                </div>
+                <div class="box">
+                    <div class="border-top"></div>
+                    <div class="border-right"></div>
+                    <div class="border-bottom"></div>
+                    <div class="border-left"></div>
+                    <p class="box_text">
+                        画面内に入ると<br>
+                        アニメーションが開始！
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="advantages" id="advantages">
+            <div class="container05">
+                <h1 class="advantages_title">What Can We Do?</h1>
+                <p class="advantages_description">
+                    Intersection Observer APIを使用することで、以下のようなことが可能になります。
+                </p>
+                <ul class="advantages_list">
+                    <li class="list_item">
+                        <i class="fas fa-play-circle fa-3x"></i>
+                        <h3>アニメーション制御</h3>
+                        <p>
+                            スクロール位置に応じた<br>
+                            アニメーションの開始・停止
+                        </p>
+                    </li>
+                    <li class="list_item">
+                        <i class="fas fa-cloud-download-alt fa-3x"></i>
+                        <h3>レイジーロード</h3>
+                        <p>
+                            要素の表示状態に基づく<br>
+                            コンテンツの読み込み
+                        </p>
+                    </li>
+                    <li class="list_item">
+                        <i class="fas fa-tachometer-alt fa-3x"></i>
+                        <h3>パフォーマンス</h3>
+                        <p>パフォーマンスの向上とリソースの節約</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="practice" id="practice">
+            <div class="container06">
+                <h1 class="practice_title">Let's practice!</h1>
+                <p class="practice_description">
+                    ここでは、実際にIntersection Observer APIを使用したサンプルコードを紹介します。<br>
+                    コードを実行して、スクロール連動アニメーションの動作を体験してみましょう。
+                </p>
+                <div class="code_block">
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
