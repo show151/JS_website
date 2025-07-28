@@ -42,8 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, {
-        threshold: 0.1, // 要素の10%が見えたらコールバックを実行
-        rootMargin: '-50px' // 少し余裕を持たせる
+        threshold: 0.5, // 要素の50%が見えたらコールバックを実行
     });
     
     // ボックス用のIntersection Observer設定
@@ -69,14 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, {
         threshold: 0.5, // ボックスの50%が見えたらコールバックを実行
-        rootMargin: '0px' // マージンなし
     });
     
     // トップセクションのアニメーション実行
     animateTopSection();
     
     // 監視する要素を登録
-    const elements = document.querySelectorAll('.top_title, .top_description, .about_title, .about_description, .how_title, .how_description, .what_title, .what_description, .advantages_title, .advantages_description, .advantages_list, .practice_title, .practice_description, .code_block');
+    const elements = document.querySelectorAll('.top_title, .top_description, .about_title, .about_description, .how_title, .how_description, .what_title, .what_description, .more_title, .more_description, .more_images, .advantages_title, .advantages_description, .advantages_list, .practice_title, .practice_description, .code_block');
     elements.forEach(el => {
         observer.observe(el);
     });
