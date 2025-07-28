@@ -1,114 +1,102 @@
-const menuButton = document.getElementById("menuButton");
-let isMenuOpened = false;
+// Loading画面の制御
+window.addEventListener('load', () => {
+  const loading = document.getElementById('loading');
+  
+  // 最低2秒間はLoading画面を表示
+  setTimeout(() => {
+    loading.classList.add('fade-out');
+    
+    // フェードアウト完了後にLoading要素を削除
+    setTimeout(() => {
+      loading.remove();
+    }, 500);
+  }, 2000);
+});
 
-function toggleMenu() {
-    isMenuOpened = !isMenuOpened;
-    if (isMenuOpened) {
-        // メニューを開いた時の処理
-        menuButton.classList.add("is-opened");
-    } else {
-        // メニューを閉じた時の処理
-        menuButton.classList.remove("is-opened");
-    }
-}
-
-menuButton.addEventListener("click", toggleMenu);
-
-// スクロールアニメーション
 document.addEventListener('DOMContentLoaded', () => {
-    // トップセクションのアニメーション
-    const animateTopSection = () => {
-        const topTitle = document.querySelector('.top_title');
-        const topDescription = document.querySelector('.top_description');
-        
-        // 初回ロード時のアニメーション
-        setTimeout(() => {
-            topTitle.classList.add('visible');
-            topDescription.classList.add('visible');
-        }, 500);
-    };
+  // 要素取得
+  const menuButton = document.getElementById("menuButton");
+  const navMenu = document.getElementById("navMenu");
+  const navOverlay = document.getElementById("navOverlay");
+  const navLinks = document.querySelectorAll(".nav-menu__link");
+  const body = document.body;
+
+  // メニューの開閉
+  const toggleMenu = () => {
+    const isOpen = navMenu.classList.contains('is-open');
     
-    // 通常の要素用のIntersection Observer設定
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            // 要素が画面内に入った場合
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                console.log(`${entry.target.className} is now visible`);
-            } else {
-                // 要素が画面外に出た場合
-                entry.target.classList.remove('visible');
-                console.log(`${entry.target.className} is now hidden`);
-            }
+    navMenu.classList.toggle('is-open', !isOpen);
+    navOverlay.classList.toggle('is-open', !isOpen);
+    menuButton.classList.toggle('is-opened', !isOpen);
+    body.classList.toggle('nav-open', !isOpen);
+  };
+
+  // メニューを閉じる
+  const closeMenu = () => {
+    navMenu.classList.remove('is-open');
+    navOverlay.classList.remove('is-open');
+    menuButton.classList.remove('is-opened');
+    body.classList.remove('nav-open');
+  };
+
+  // イベントリスナー
+  menuButton?.addEventListener("click", toggleMenu);
+  navOverlay?.addEventListener("click", closeMenu);
+
+  // ナビリンククリック時の処理
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
         });
-    }, {
-        threshold: 0.5, // 要素の50%が見えたらコールバックを実行
+        closeMenu();
+      }
     });
-    
-    // ボックス用のIntersection Observer設定
-    const boxObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            // ボックスが画面内に入った場合
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                // ボックス内の要素も可視状態にする
-                const boxElements = entry.target.querySelectorAll('.box_text, .border-top, .border-bottom, .border-left, .border-right');
-                boxElements.forEach(el => {
-                    el.classList.add('visible');
-                });
-            } else {
-                // ボックスが画面外に出た場合
-                entry.target.classList.remove('visible');
-                // ボックス内の要素も非表示にする
-                const boxElements = entry.target.querySelectorAll('.box_text, .border-top, .border-bottom, .border-left, .border-right');
-                boxElements.forEach(el => {
-                    el.classList.remove('visible');
-                });
-            }
-        });
-    }, {
-        threshold: 0.5, // ボックスの50%が見えたらコールバックを実行
+  });
+
+  // ESCキーでメニューを閉じる
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navMenu.classList.contains('is-open')) {
+      closeMenu();
+    }
+  });
+
+  // ヒーロー初期アニメーション（Loading完了後に実行）
+  setTimeout(() => {
+    document.querySelector('.hero__title')?.classList.add('visible');
+    document.querySelector('.hero__description')?.classList.add('visible');
+  }, 3000); // Loading時間 + 少し遅延
+
+  // スクロールアニメーション
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const { target, isIntersecting } = entry;
+      target.classList.toggle('visible', isIntersecting);
+      
+      // 子要素も同時制御
+      const children = target.querySelectorAll('[class*="__text"], [class*="__border"], [class*="__item"]');
+      children.forEach(child => child.classList.toggle('visible', isIntersecting));
     });
-    
-    // トップセクションのアニメーション実行
-    animateTopSection();
-    
-    // 監視する要素を登録
-    const elements = document.querySelectorAll('.top_title, .top_description, .about_title, .about_description, .how_title, .how_description, .what_title, .what_description, .more_title, .more_description, .more_images, .advantages_title, .advantages_description, .advantages_list, .practice_title, .practice_description, .code_block');
-    elements.forEach(el => {
-        observer.observe(el);
-    });
-    
-    // ボックス要素を別のobserverで監視
-    const boxes = document.querySelectorAll('.box');
-    boxes.forEach(box => {
-        boxObserver.observe(box);
-    });
-    
-    // リストアイテムのアニメーション設定
-    const listObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // リストが表示されたら、各アイテムにクラスを追加
-                const listItems = entry.target.querySelectorAll('.list_item');
-                listItems.forEach(item => {
-                    item.classList.add('visible');
-                });
-            } else {
-                // リストが非表示になったら、各アイテムからクラスを削除
-                const listItems = entry.target.querySelectorAll('.list_item');
-                listItems.forEach(item => {
-                    item.classList.remove('visible');
-                });
-            }
-        });
-    }, {
-        threshold: 0.5
-    });
-    
-    // リスト要素を監視
-    const lists = document.querySelectorAll('.advantages_list');
-    lists.forEach(list => {
-        listObserver.observe(list);
-    });
+  }, { threshold: 0.2, rootMargin: '-50px' });
+
+  // 監視対象要素
+  const selectors = [
+    '.section__title',
+    '.section__description', 
+    '.demo-box',
+    '.image-grid',
+    '.feature-list',
+    '.code-demo'
+  ];
+
+  // 監視開始
+  selectors.forEach(selector => {
+    document.querySelectorAll(selector).forEach(el => observer.observe(el));
+  });
 });

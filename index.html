@@ -8,130 +8,160 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kosugi&display=swap" rel="stylesheet">
-    <script src="script.js" defer></script>
     <script src="https://kit.fontawesome.com/ba7ff48937.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
+    <div class="loading" id="loading">
+        <div class="loading__content">
+            <div class="loading__spinner"></div>
+            <p class="loading__text">Loading...</p>
+        </div>
+    </div>
+
     <header class="header">
         <div class="container">
-            <div class="header_middle">
-                <h2 class="header_title">Scroll to Reveal</h2>
-            </div>
-            <button id="menuButton" type="button" class="menu-button" aria-labelledby="menuButtonLabel">
-                <span class="menu-button__line">
-                    <span id="menuButtonLabel" style="display: none">メニューボタン</span>
-                </span>
+            <h2 class="header__title">Scroll to Reveal</h2>
+            <button id="menuButton" class="menu-button" aria-label="メニューボタン">
+                <span class="menu-button__line"></span>
             </button>
         </div>
     </header>
-    <main class="main">
-        <section class="main_visual" id="top">
-            <video class="background-video" autoplay loop muted playsinline>
+
+    <nav class="nav-menu" id="navMenu">
+        <ul class="nav-menu__list">
+            <li class="nav-menu__item">
+                <a href="#top" class="nav-menu__link">Top</a>
+            </li>
+            <li class="nav-menu__item">
+                <a href="#about" class="nav-menu__link">About</a>
+            </li>
+            <li class="nav-menu__item">
+                <a href="#how" class="nav-menu__link">How It Works</a>
+            </li>
+            <li class="nav-menu__item">
+                <a href="#what" class="nav-menu__link">What Is Observer</a>
+            </li>
+            <li class="nav-menu__item">
+                <a href="#more" class="nav-menu__link">More About</a>
+            </li>
+            <li class="nav-menu__item">
+                <a href="#advantages" class="nav-menu__link">Advantages</a>
+            </li>
+            <li class="nav-menu__item">
+                <a href="#practice" class="nav-menu__link">Practice</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <main>
+        <section class="hero" id="top">
+            <video class="hero__video" autoplay loop muted playsinline>
                 <source src="movie/4990317-hd_1920_1080_30fps.mp4" type="video/mp4">
             </video>
-            <div class="container01">
-                <h1 class="top_title">Scrollで動く、JSで魅せる</h1>
-                <p class="top_description">～コードで体験する、Webアニメーションの世界～</p>
+            <div class="container">
+                <h1 class="hero__title">Scrollで動く、JSで魅せる</h1>
+                <p class="hero__description">～コードで体験する、Webアニメーションの世界～</p>
             </div>
         </section>
-        <section class="about" id="about">
-            <div class="container02">
-                <h1 class="about_title">About This Site</h1>
-                <p class="about_description">
+
+        <section class="section" id="about">
+            <div class="container">
+                <h2 class="section__title">About This Site</h2>
+                <p class="section__description">
                     Webサイトでよく見るスクロール連動アニメーション。<br>
                     これらはどのようにして実現しているのでしょうか。<br>
                     サンプルコードとともに実際に見ていきましょう。
                 </p>
             </div>
         </section>
-        <section class="how" id="how">
-            <div class="container03">
-                <h1 class="how_title">How It Works</h1>
-                <p class="how_description">
+
+        <section class="section section--left" id="how">
+            <div class="container">
+                <h2 class="section__title">How It Works</h2>
+                <p class="section__description">
                     スクロールに連動したアニメーションは、Intersection Observer API を用いて実現しています。<br>
                     これにより、スクロール位置に応じて要素の表示状態を監視・制御し、適切なタイミングでアニメーションを実行できます。
                 </p>
             </div>
         </section>
-        <section class="what" id="what">
-            <div class="container04">
-                <div class="what_content">
-                    <h1 class="what_title">
+
+        <section class="section section--split" id="what">
+            <div class="container">
+                <div class="section__content">
+                    <h2 class="section__title">
                         What Is <br> 
                         The Intersection Observer?
-                    </h1>
-                    <p class="what_description">
+                    </h2>
+                    <p class="section__description">
                         Intersection Observer APIは、ターゲット要素がビューポート（ブラウザの表示領域）または他の指定された要素（ルート要素）と交差する（Intersectionする）のを非同期的に監視するためのWeb APIです。<br>
                         簡単に言えば、要素が「画面に入った・出た」を感知できる仕組みです。<br>
                         従来のスクロールイベントに比べて、非常に軽量でパフォーマンスが高く、複雑な計算を必要とせずに効率的なアニメーションやレイジーロードを実現できます。
                     </p>
                 </div>
-                <div class="box">
-                    <div class="border-top"></div>
-                    <div class="border-right"></div>
-                    <div class="border-bottom"></div>
-                    <div class="border-left"></div>
-                    <p class="box_text">
+                <div class="demo-box">
+                    <div class="demo-box__border demo-box__border--top"></div>
+                    <div class="demo-box__border demo-box__border--right"></div>
+                    <div class="demo-box__border demo-box__border--bottom"></div>
+                    <div class="demo-box__border demo-box__border--left"></div>
+                    <p class="demo-box__text">
                         画面内に入ると<br>
                         アニメーションが開始！
                     </p>
                 </div>
             </div>
         </section>
-        <section class="more" id="more">
-            <div class="container045">
-                <h1 class="more_title">More About Intersection Observer</h1>
-                <p class="more_description">
+
+        <section class="section" id="more">
+            <div class="container">
+                <h2 class="section__title">More About Intersection Observer</h2>
+                <p class="section__description">
                     Intersection Observer APIは、画像などにも適用可能です。
                 </p>
-                <div class="more_images">
-                    <img src="image/32661683_s.jpg" alt="Intersection Observer Example" class="more_image">
-                    <img src="image/33055106_s.jpg" alt="Intersection Observer Example" class="more_image">
+                <div class="image-grid">
+                    <img src="image/32661683_s.jpg" alt="Intersection Observer Example" class="image-grid__item">
+                    <img src="image/33055106_s.jpg" alt="Intersection Observer Example" class="image-grid__item">
                 </div>
             </div>
         </section>
-        <section class="advantages" id="advantages">
-            <div class="container05">
-                <h1 class="advantages_title">What Can We Do?</h1>
-                <p class="advantages_description">
+
+        <section class="section" id="advantages">
+            <div class="container">
+                <h2 class="section__title">What Can We Do?</h2>
+                <p class="section__description">
                     Intersection Observer APIを使用することで、以下のようなことが可能になります。
                 </p>
-                <ul class="advantages_list">
-                    <li class="list_item">
-                        <i class="fas fa-play-circle fa-3x"></i>
+                <ul class="feature-list">
+                    <li class="feature-list__item">
+                        <i class="fas fa-play-circle fa-3x" aria-hidden="true"></i>
                         <h3>アニメーション制御</h3>
-                        <p>
-                            スクロール位置に応じた<br>
-                            アニメーションの開始・停止
-                        </p>
+                        <p>スクロール位置に応じたアニメーションの開始・停止</p>
                     </li>
-                    <li class="list_item">
-                        <i class="fas fa-cloud-download-alt fa-3x"></i>
+                    <li class="feature-list__item">
+                        <i class="fas fa-cloud-download-alt fa-3x" aria-hidden="true"></i>
                         <h3>レイジーロード</h3>
-                        <p>
-                            要素の表示状態に基づく<br>
-                            コンテンツの読み込み
-                        </p>
+                        <p>要素の表示状態に基づくコンテンツの読み込み</p>
                     </li>
-                    <li class="list_item">
-                        <i class="fas fa-tachometer-alt fa-3x"></i>
+                    <li class="feature-list__item">
+                        <i class="fas fa-tachometer-alt fa-3x" aria-hidden="true"></i>
                         <h3>パフォーマンス</h3>
                         <p>パフォーマンスの向上とリソースの節約</p>
                     </li>
                 </ul>
             </div>
         </section>
-        <section class="practice" id="practice">
-            <div class="container06">
-                <h1 class="practice_title">Let's practice!</h1>
-                <p class="practice_description">
+
+        <section class="section" id="practice">
+            <div class="container">
+                <h2 class="section__title">Let's practice!</h2>
+                <p class="section__description">
                     ここでは、実際にIntersection Observer APIを使用したサンプルコードを紹介します。<br>
                     コードを実行して、スクロール連動アニメーションの動作を体験してみましょう。
                 </p>
-                <div class="code_block">
-                    <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="NPGRYEd" data-pen-title="Intersection Observer" data-user="show151" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+                <div class="code-demo">
+                    <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="NPGRYEd" data-pen-title="Intersection Observer" data-user="show151">
                         <span>See the Pen <a href="https://codepen.io/show151/pen/NPGRYEd">
                             Intersection Observer</a> by Sho Kawano (<a href="https://codepen.io/show151">@show151</a>)
                             on <a href="https://codepen.io">CodePen</a>.</span>
@@ -141,11 +171,12 @@
             </div>
         </section>
     </main>
+
     <footer class="footer">
-        <div class="container07">
-            <p class="footer_text">このサイトのソースコードは<a href="https://github.com/show151/JS_website">GitHub</a>で公開されています。</p>
-            <p class="footer_text1">© 2023 Sho Kawano</p>
-            <p class="footer_text2">本コンテンツの作成時間：18時間</p>
+        <div class="container">
+            <p>このサイトのソースコードは<a href="https://github.com/show151/JS_website">GitHub</a>で公開されています。</p>
+            <p>© 2023 Sho Kawano</p>
+            <p>本コンテンツの作成時間：18時間</p>
         </div>
     </footer>
 </body>
